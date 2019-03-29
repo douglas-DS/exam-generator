@@ -53,13 +53,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
 
         token = TOKEN_PREFIX + token;
-        String tokenJson = "{\"token\":" + addQuotes(token) + ",\"exp\":" + addQuotes(expTimeUTC.toString()) + "}";
+        String tokenJson = "{\"token\" : " + addQuotes(token) + ",\n\"exp\" : " + addQuotes(expTimeUTC.toString()) + "\n}";
         response.getWriter().write(tokenJson);
         response.addHeader("Content-Type", "application/json;charset=UTF-8");
         response.addHeader(HEADER_STRING, token);
     }
 
     private String addQuotes(String value) {
-        return new StringBuilder(300).append(value).append("\"").toString();
+        return new StringBuilder(300).append("\"").append(value).append("\"").toString();
     }
 }
